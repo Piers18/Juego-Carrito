@@ -2,14 +2,24 @@
 
 using namespace std;
 
-int const filas_terminal = 50;
-int const columnas_terminal = 100;
+// Constantes para el tamano de la terminal
+const int filas_terminal = 50;
+const int columnas_terminal = 100;
+
+// Constante para dibujar el carrito
+const char carro = 254;
 
 #ifdef _WIN32
     #include <windows.h>
+    #include <conio.h>
 #else
     #include <unistd.h>
     #include <stdio.h>
+
+    extern "C" {
+        #include <ncurses.h>
+    }
+
 #endif
 
 // Funcion para definir la altura y ancho de la terminal
@@ -67,9 +77,21 @@ void limpiar_pantalla(){
 int main(){
     definir_tamano_terminal();
 
-    char carro = 254;
+    #ifdef __linux__
+        // configuracion para videjuego con la libreria ncurses
+        initscr();  // inicializa ncurses
+        noecho();   // hace que no se muestre lo que se escribe
+        cbreak();   // desabilita el buffer de linea
+    #endif
+
+    int palabra = getch();
+
+    cout<<"Escribe: "<<palabra<<endl;
+
 	
-	cout<<carro<<endl;
+	#ifdef __linux__
+        endwin(); // finaliza ncurses
+    #endif
 
     return 0;
 }
