@@ -15,11 +15,7 @@ const char carro = 254;
 #else
     #include <unistd.h>
     #include <stdio.h>
-
-    extern "C" {
-        #include <ncurses.h>
-    }
-
+    #include <ncurses.h>
 #endif
 
 // Funcion para definir la altura y ancho de la terminal
@@ -78,21 +74,18 @@ int main(){
     definir_tamano_terminal();
     limpiar_pantalla();
 
-    #ifdef __linux__
-        // configuracion para videjuego con la libreria ncurses
-        initscr();  // inicializa ncurses
-        noecho();   // hace que no se muestre lo que se escribe
-        cbreak();   // desabilita el buffer de linea
-    #endif
+    
+    // configuracion para videjuego con la libreria ncurses
+    initscr();  // inicializa ncurses
+    noecho();   // hace que no se muestre lo que se escribe
+    cbreak();   // desabilita el buffer de linea
 
     int palabra = getch();
 
     cout<<"Escribe: "<<palabra<<endl;
 
 	
-	#ifdef __linux__
-        endwin(); // finaliza ncurses
-    #endif
+    endwin(); // finaliza ncurses
 
     return 0;
 }
