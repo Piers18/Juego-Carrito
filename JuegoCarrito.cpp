@@ -76,6 +76,7 @@ void limpiar_pantalla(){
 
 int main(){
     definir_tamano_terminal();
+    limpiar_pantalla();
 
     #ifdef __linux__
         // configuracion para videjuego con la libreria ncurses
